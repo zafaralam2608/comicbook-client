@@ -5,7 +5,6 @@ import Profile from './Profile';
 import Album from './Album';
 
 const Content = () => {
-
   return (
     <Box
       component="main"

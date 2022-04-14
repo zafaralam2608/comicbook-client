@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import {
   Box, Card, CardActions, CardContent, CardHeader, CardMedia, Divider, Grid, Table,
 } from '@mui/material';
@@ -109,45 +108,6 @@ const Profile = ({ profile, dispatch }) => {
       </Grid>
     </React.Fragment>
   );
-};
-
-Profile.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  profile: PropTypes.exact({
-    loading: PropTypes.bool,
-    name: PropTypes.string,
-    alias: PropTypes.string,
-    base: PropTypes.string,
-    debutIn: PropTypes.string,
-    debutOn: PropTypes.string,
-    universe: PropTypes.string,
-    links: PropTypes.exact({
-      official: PropTypes.string,
-      wikipedia: PropTypes.string,
-      instagram: PropTypes.string,
-      twitter: PropTypes.string,
-      facebook: PropTypes.string,
-    }),
-  }),
-};
-
-Profile.defaultProps = {
-  profile: PropTypes.exact({
-    loading: false,
-    name: '',
-    alias: '',
-    base: '',
-    debutIn: '',
-    debutOn: '',
-    universe: '',
-    links: PropTypes.exact({
-      official: '',
-      wikipedia: '',
-      instagram: '',
-      twitter: '',
-      facebook: '',
-    }),
-  }),
 };
 
 export default connect((store) => ({

@@ -5,7 +5,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AppBar from './AppBar';
 
 const Header = ({ handleDrawerOpen, open }) => {
-
   return (
     <AppBar position="absolute" open={open}>
       <Toolbar sx={{ pr: '24px' }} >
@@ -24,11 +23,6 @@ const Header = ({ handleDrawerOpen, open }) => {
       </Toolbar>
     </AppBar>
   );
-};
-
-Header.propTypes = {
-  open: PropTypes.bool.isRequired,
-  handleDrawerOpen: PropTypes.func.isRequired,
 };
 
 export default Header;

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { Grid } from '@mui/material'
+import { Box, Grid } from '@mui/material'
 import * as appActions from '../actions/appActions';
 import Spinner from './Spinner';
 import Thumbnail from './Thumbnail';
@@ -16,7 +15,7 @@ const Album = ({ album, dispatch }) => {
   if (profilesLoading) { return <Spinner />; }
 
   return (
-    <React.Fragment>
+    <Box>
       <Grid container>
         {
           profiles.map(
@@ -26,16 +25,8 @@ const Album = ({ album, dispatch }) => {
           )
         }
       </Grid>
-    </React.Fragment>
+    </Box>
   );
-};
-
-Album.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  album: PropTypes.exact({
-    profilesLoading: PropTypes.bool,
-    profiles: PropTypes.arrayOf(PropTypes.element),
-  }).isRequired,
 };
 
 export default connect((store) => ({

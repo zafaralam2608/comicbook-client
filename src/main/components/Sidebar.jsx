@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   Divider, IconButton, Link, List, ListItem, ListItemIcon, ListItemText,
 } from '@mui/material';
@@ -44,11 +43,6 @@ const Sidebar = ({ open, handleDrawerClose }) => {
       </List>
     </Drawer>
   );
-};
-
-Sidebar.propTypes = {
-  open: PropTypes.bool.isRequired,
-  handleDrawerClose: PropTypes.func.isRequired,
 };
 
 export default Sidebar;

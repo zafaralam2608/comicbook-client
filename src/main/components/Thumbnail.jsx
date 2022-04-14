@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import {
   Button, Card, CardActions, CardHeader, CardMedia,
 } from '@mui/material';
@@ -49,14 +48,6 @@ const Thumbnail = ({ profile }) => {
       </CardActions>
     </Card>
   );
-};
-
-Thumbnail.propTypes = {
-  profile: PropTypes.exact({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    alias: PropTypes.string,
-  }).isRequired,
 };
 
 export default Thumbnail;
