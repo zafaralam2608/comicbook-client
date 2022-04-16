@@ -2,7 +2,7 @@ import React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material';
 import Layout from './Layout';
 
-const Application = () => {
+function Application() {
   const theme = createTheme({
     palette: {
       type: 'dark',
@@ -14,6 +14,6 @@ const Application = () => {
       <Layout />
     </ThemeProvider>
   );
-};
+}
 
 export default Application;

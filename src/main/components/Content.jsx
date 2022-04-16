@@ -4,7 +4,7 @@ import { Box, Container, Toolbar } from '@mui/material';
 import Profile from './Profile';
 import Album from './Album';
 
-const Content = () => {
+function Content() {
   return (
     <Box
       component="main"
@@ -24,6 +24,6 @@ const Content = () => {
       </Container>
     </Box>
   );
-};
+}
 
 export default Content;

@@ -4,12 +4,12 @@ import {
 } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 import { ChevronLeft, Dashboard, People } from '@mui/icons-material';
+import PropTypes from 'prop-types';
 import Drawer from './Drawer';
 
-const Sidebar = ({ open, handleDrawerClose }) => {
-
+function Sidebar({ open, handleDrawerClose }) {
   return (
-    <Drawer variant="permanent" open={open} >
+    <Drawer variant="permanent" open={open}>
       <Toolbar
         sx={{
           display: 'flex',
@@ -43,6 +43,11 @@ const Sidebar = ({ open, handleDrawerClose }) => {
       </List>
     </Drawer>
   );
+}
+
+Sidebar.propTypes = {
+  open: PropTypes.bool.isRequired,
+  handleDrawerClose: PropTypes.func.isRequired,
 };
 
 export default Sidebar;

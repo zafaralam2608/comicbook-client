@@ -1,19 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { IconButton, Toolbar, Typography, } from '@mui/material';
+import { IconButton, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import PropTypes from 'prop-types';
 import AppBar from './AppBar';
 
-const Header = ({ handleDrawerOpen, open }) => {
+function Header({ handleDrawerOpen, open }) {
   return (
     <AppBar position="absolute" open={open}>
-      <Toolbar sx={{ pr: '24px' }} >
+      <Toolbar sx={{ pr: '24px' }}>
         <IconButton
           edge="start"
           color="default"
           aria-label="open drawer"
           onClick={() => handleDrawerOpen()}
-          sx={{ marginRight: '36px', ...(open && { display: 'none' }), }}
+          sx={{ marginRight: '36px', ...(open && { display: 'none' }) }}
         >
           <MenuIcon />
         </IconButton>
@@ -23,6 +23,11 @@ const Header = ({ handleDrawerOpen, open }) => {
       </Toolbar>
     </AppBar>
   );
+}
+
+Header.propTypes = {
+  open: PropTypes.bool.isRequired,
+  handleDrawerOpen: PropTypes.func.isRequired,
 };
 
 export default Header;

@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { Box, CssBaseline } from '@mui/material';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Content from './Content';
-import { Box, CssBaseline } from '@mui/material';
 
-const Layout = () => {
-
+function Layout() {
   const [open, setOpen] = useState(true);
 
   const handleDrawerOpen = () => {
@@ -18,7 +17,7 @@ const Layout = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex', }}>
+    <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <Header
         handleDrawerOpen={handleDrawerOpen}
@@ -33,6 +32,6 @@ const Layout = () => {
       </BrowserRouter>
     </Box>
   );
-};
+}
 
 export default Layout;
