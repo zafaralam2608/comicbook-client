@@ -2,16 +2,16 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Box, Grid } from '@mui/material';
 import PropTypes from 'prop-types';
-import * as appActions from '../actions/appActions';
+import { getProfiles } from '../actions/appActions';
 import Spinner from './Spinner';
 import Thumbnail from './Thumbnail';
 
 function Album({ album, dispatch }) {
   const { profiles, profilesLoading } = album;
 
-  useEffect(() => (
-    dispatch(appActions.getProfiles())
-  ), []);
+  useEffect(() => {
+    dispatch(getProfiles());
+  }, []);
 
   if (profilesLoading) { return <Spinner />; }
 
@@ -34,7 +34,11 @@ Album.propTypes = {
   dispatch: PropTypes.func.isRequired,
   album: PropTypes.exact({
     profilesLoading: PropTypes.bool,
-    profiles: PropTypes.arrayOf(PropTypes.element),
+    profiles: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      alias: PropTypes.string,
+    })),
   }).isRequired,
 };
 

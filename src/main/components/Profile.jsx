@@ -5,22 +5,28 @@ import {
   Box, Card, CardActions, CardContent, CardHeader, CardMedia, Divider, Grid, Table,
 } from '@mui/material';
 import PropTypes from 'prop-types';
-import * as profileActions from '../actions/profileActions';
+import { getProfile } from '../actions/profileActions';
+import { getLinks } from '../actions/linksActions';
 import Spinner from './Spinner';
 import { LOGO_URL, PHOTO_URL } from '../constants/config';
 
-function Profile({ profile, dispatch }) {
+function Profile({ profile, links, dispatch }) {
   const { id } = useParams();
 
   useEffect(() => {
-    dispatch(profileActions.getProfile(id));
+    dispatch(getProfile(id));
+    dispatch(getLinks(id));
   }, []);
 
   const {
-    loading, name, alias, base, debutIn, debutOn, links,
+    profileLoading, name, alias, base, debutIn, debutOn,
   } = profile;
 
-  if (loading) { return <Spinner />; }
+  const {
+    linksLoading, official, wikipedia, instagram, twitter, facebook,
+  } = links;
+
+  if (profileLoading || linksLoading) { return <Spinner />; }
 
   return (
     <Grid container spacing={3}>
@@ -73,7 +79,7 @@ function Profile({ profile, dispatch }) {
                 <tr>
                   <th>Official</th>
                   <td>
-                    <a href={links.official}>
+                    <a href={official}>
                       <img
                         src={`${LOGO_URL}/${id}`}
                         alt="o"
@@ -87,16 +93,16 @@ function Profile({ profile, dispatch }) {
           </CardContent>
           <Divider />
           <CardActions>
-            <a href={links.wikipedia}>
+            <a href={wikipedia}>
               <img src="../logos/wikipedia.svg" alt="w" />
             </a>
-            <a href={links.instagram}>
+            <a href={instagram}>
               <img src="../logos/instagram.svg" alt="i" />
             </a>
-            <a href={links.twitter}>
+            <a href={twitter}>
               <img src="../logos/twitter.svg" alt="t" />
             </a>
-            <a href={links.facebook}>
+            <a href={facebook}>
               <img src="../logos/facebook.svg" alt="f" />
             </a>
           </CardActions>
@@ -108,9 +114,25 @@ function Profile({ profile, dispatch }) {
 
 Profile.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  profile: PropTypes.element.isRequired,
+  profile: PropTypes.shape({
+    profileLoading: PropTypes.bool,
+    name: PropTypes.string.isRequired,
+    alias: PropTypes.string,
+    base: PropTypes.string,
+    debutIn: PropTypes.string,
+    debutOn: PropTypes.string,
+  }).isRequired,
+  links: PropTypes.shape({
+    linksLoading: PropTypes.bool,
+    official: PropTypes.string,
+    wikipedia: PropTypes.string,
+    instagram: PropTypes.string,
+    twitter: PropTypes.string,
+    facebook: PropTypes.string,
+  }).isRequired,
 };
 
 export default connect((store) => ({
   profile: store.get('profile'),
+  links: store.get('links'),
 }))(Profile);

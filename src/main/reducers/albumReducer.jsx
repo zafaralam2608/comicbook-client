@@ -20,7 +20,10 @@ const albumReducer = (state = initialState, action) => {
     }
     case LOAD_PROFILES_SUCCESS: {
       finalState.profilesLoading = false;
-      finalState.profiles = action.payload;
+      action.payload.forEach((profile) => {
+        const { id, name, alias } = profile;
+        finalState.profiles.push({ id, name, alias });
+      });
       break;
     }
     default:
