@@ -15,7 +15,7 @@ function Content() {
       }}
     >
       <Toolbar />
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Container maxWidth="xl" sx={{ mt: 5, mb: 5 }}>
         <Routes>
           <Route exact path="/" element={<div>TO DO</div>} />
           <Route path="/profiles" element={<Album />} />

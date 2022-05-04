@@ -79,7 +79,7 @@ function Profile({ profile, links, dispatch }) {
                 <tr>
                   <th>Official</th>
                   <td>
-                    <a href={official}>
+                    <a href={official} target="_blank" rel="noopener noreferrer">
                       <img
                         src={`${LOGO_URL}/${id}`}
                         alt="o"
@@ -93,16 +93,16 @@ function Profile({ profile, links, dispatch }) {
           </CardContent>
           <Divider />
           <CardActions>
-            <a href={wikipedia}>
+            <a href={wikipedia} target="_blank" rel="noopener noreferrer">
               <img src="../logos/wikipedia.svg" alt="w" />
             </a>
-            <a href={instagram}>
+            <a href={instagram} target="_blank" rel="noopener noreferrer">
               <img src="../logos/instagram.svg" alt="i" />
             </a>
-            <a href={twitter}>
+            <a href={twitter} target="_blank" rel="noopener noreferrer">
               <img src="../logos/twitter.svg" alt="t" />
             </a>
-            <a href={facebook}>
+            <a href={facebook} target="_blank" rel="noopener noreferrer">
               <img src="../logos/facebook.svg" alt="f" />
             </a>
           </CardActions>
