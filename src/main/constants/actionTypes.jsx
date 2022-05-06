@@ -10,3 +10,18 @@ export const LOAD_PHOTO_SUCCESS = 'LOAD_PHOTO_SUCCESS';
 export const LOAD_LINKS_FAILURE = 'LOAD_LINKS_FAILURE';
 export const LOAD_LINKS_PENDING = 'LOAD_LINKS_PENDING';
 export const LOAD_LINKS_SUCCESS = 'LOAD_LINKS_SUCCESS';
+export const profile = {
+  failure: 'LOAD_PROFILE_FAILURE',
+  pending: 'LOAD_PROFILE_PENDING',
+  success: 'LOAD_PROFILE_SUCCESS',
+};
+export const bio = {
+  failure: 'LOAD_BIO_FAILURE',
+  pending: 'LOAD_BIO_PENDING',
+  success: 'LOAD_BIO_SUCCESS',
+};
+export const abilities = {
+  failure: 'LOAD_ABILITIES_FAILURE',
+  pending: 'LOAD_ABILITIES_PENDING',
+  success: 'LOAD_ABILITIES_SUCCESS',
+};

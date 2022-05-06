@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Box, Grid } from '@mui/material';
 import PropTypes from 'prop-types';
 import { getProfiles } from '../actions/appActions';
-import Spinner from './Spinner';
+import Spinner from '../commons/Spinner';
 import Thumbnail from './Thumbnail';
 
 function Album({ album, dispatch }) {

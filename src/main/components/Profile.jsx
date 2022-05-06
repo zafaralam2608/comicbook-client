@@ -2,20 +2,26 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
-  Box, Card, CardActions, CardContent, CardHeader, CardMedia, Divider, Grid, Table,
+  Box, Card, CardContent, CardHeader, CardMedia, Grid, Table,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import { getProfile } from '../actions/profileActions';
-import { getLinks } from '../actions/linksActions';
-import Spinner from './Spinner';
-import { LOGO_URL, PHOTO_URL } from '../constants/config';
+import { getBio } from '../actions/bioActions';
+import { getAbilities } from '../actions/abilitiesActions';
+import Spinner from '../commons/Spinner';
+import { PHOTO_URL } from '../constants/config';
+import Links from '../commons/Links';
+import Panels from '../commons/Panels';
 
-function Profile({ profile, links, dispatch }) {
+function Profile({
+  profile, bio, abilities, dispatch,
+}) {
   const { id } = useParams();
 
   useEffect(() => {
     dispatch(getProfile(id));
-    dispatch(getLinks(id));
+    dispatch(getBio(id));
+    dispatch(getAbilities(id));
   }, []);
 
   const {
@@ -23,33 +29,30 @@ function Profile({ profile, links, dispatch }) {
   } = profile;
 
   const {
-    linksLoading, official, wikipedia, instagram, twitter, facebook,
-  } = links;
+    bioLoading, bioContent,
+  } = bio;
 
-  if (profileLoading || linksLoading) { return <Spinner />; }
+  const {
+    abilitiesLoading, abilitiesContent,
+  } = abilities;
+
+  const items = [
+    {
+      order: '0', label: 'Bio', loading: bioLoading, content: bioContent,
+    },
+    {
+      order: '1', label: 'Abilities', loading: abilitiesLoading, content: abilitiesContent,
+    },
+  ];
+
+  if (profileLoading) { return <Spinner />; }
 
   return (
-    <Grid container spacing={3}>
-      <Grid item lg={8} md={6} xs={12}>
-        <Card>
-          <CardHeader
-            title="Abilities"
-          />
-          <CardContent
-            style={{ minHeight: '200px' }}
-          />
-        </Card>
-        <Box p={2} />
-        <Card>
-          <CardHeader
-            title="Bio"
-          />
-          <CardContent
-            style={{ minHeight: '450px' }}
-          />
-        </Card>
+    <Grid container spacing={3} alignContent="center">
+      <Grid item lg={9} md={6} xs={12}>
+        <Panels items={items} />
       </Grid>
-      <Grid item lg={4} md={6} xs={12}>
+      <Grid item lg={3} md={6} xs={12}>
         <Card>
           <CardHeader
             title={name}
@@ -76,37 +79,12 @@ function Profile({ profile, links, dispatch }) {
                   <th>Debut on</th>
                   <td>{debutOn}</td>
                 </tr>
-                <tr>
-                  <th>Official</th>
-                  <td>
-                    <a href={official} target="_blank" rel="noopener noreferrer">
-                      <img
-                        src={`${LOGO_URL}/${id}`}
-                        alt="o"
-                        onError={(e) => { e.target.src = '../images/logo'; }}
-                      />
-                    </a>
-                  </td>
-                </tr>
               </tbody>
             </Table>
           </CardContent>
-          <Divider />
-          <CardActions>
-            <a href={wikipedia} target="_blank" rel="noopener noreferrer">
-              <img src="../logos/wikipedia.svg" alt="w" />
-            </a>
-            <a href={instagram} target="_blank" rel="noopener noreferrer">
-              <img src="../logos/instagram.svg" alt="i" />
-            </a>
-            <a href={twitter} target="_blank" rel="noopener noreferrer">
-              <img src="../logos/twitter.svg" alt="t" />
-            </a>
-            <a href={facebook} target="_blank" rel="noopener noreferrer">
-              <img src="../logos/facebook.svg" alt="f" />
-            </a>
-          </CardActions>
         </Card>
+        <Box p={2} />
+        <Links id={id} />
       </Grid>
     </Grid>
   );
@@ -122,17 +100,18 @@ Profile.propTypes = {
     debutIn: PropTypes.string,
     debutOn: PropTypes.string,
   }).isRequired,
-  links: PropTypes.shape({
-    linksLoading: PropTypes.bool,
-    official: PropTypes.string,
-    wikipedia: PropTypes.string,
-    instagram: PropTypes.string,
-    twitter: PropTypes.string,
-    facebook: PropTypes.string,
+  bio: PropTypes.shape({
+    bioLoading: PropTypes.bool,
+    bioContent: PropTypes.string,
+  }).isRequired,
+  abilities: PropTypes.shape({
+    abilitiesLoading: PropTypes.bool,
+    abilitiesContent: PropTypes.string,
   }).isRequired,
 };
 
 export default connect((store) => ({
   profile: store.get('profile'),
-  links: store.get('links'),
+  bio: store.get('bio'),
+  abilities: store.get('abilities'),
 }))(Profile);

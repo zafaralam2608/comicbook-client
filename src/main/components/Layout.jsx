@@ -6,7 +6,7 @@ import Sidebar from './Sidebar';
 import Content from './Content';
 
 function Layout() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
